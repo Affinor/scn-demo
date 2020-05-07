@@ -1,0 +1,27 @@
+server:
+  port: 9002
+eureka:
+  client:
+    service-url:
+      defaultZone: http://EurekaServerB:8762/eureka/,http://EurekaServerA:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+spring:
+  application:
+    name: scn-demo-gate-way
+    cloud:
+      gateway:
+        routes:
+          - id: service-user-router
+            uri: lb://service-user
+            predicates:
+              - Path=/api/user/**
+          - id: service-email-router
+            uri: lb://service-email
+            predicates:
+              - Path=/api/email/**
+          - id: service-code-router
+            uri: lb://service-code
+            predicates:
+              - Path=/api/code/**

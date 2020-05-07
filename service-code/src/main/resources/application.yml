@@ -1,0 +1,26 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: service-code
+  redis:
+    host: 127.0.0.1
+    port: 3679
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://EurekaServerB:8762/eureka/,http://EurekaServerA:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+#    metadata-map:
+#      cluster: cl1
+#      region: rn1
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"

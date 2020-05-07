@@ -1,0 +1,18 @@
+server:
+  port: 8762
+spring:
+  application:
+    name: eureka-server
+  security:
+    user:
+      name: eureka
+      password: eureka
+
+eureka:
+  instance:
+    hostname: EurekaServerB
+  client:
+    serviceUrl:
+      defaultZone: http://EurekaServerA:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true

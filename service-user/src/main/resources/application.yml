@@ -1,0 +1,38 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: service-user
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///test?characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&autoReconnect=true&failOverReadOnly=false
+    username: root
+    password: root
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  cloud:
+    config:
+      name: service-user
+      profile: dev
+      label: master
+      uri: http://localhost:9006
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://EurekaServerB:8762/eureka/,http://EurekaServerA:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+#    metadata-map:
+#      cluster: cl1
+#      region: rn1
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"

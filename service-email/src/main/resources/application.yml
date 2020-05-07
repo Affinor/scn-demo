@@ -1,0 +1,34 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: service-email
+  mail:
+    host: smtp.qq.com
+    username: jin_obj@sina.com
+    password: 123456
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    port: 25
+    protocol: smtp
+eureka:
+  client:
+    service-url:
+      defaultZone: http://EurekaServerB:8762/eureka/,http://EurekaServerA:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+#    metadata-map:
+#      cluster: cl1
+#      region: rn1
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
