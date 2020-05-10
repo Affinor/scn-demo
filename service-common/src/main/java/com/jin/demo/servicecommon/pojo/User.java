@@ -2,9 +2,7 @@ package com.jin.demo.servicecommon.pojo;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author wangjin
@@ -14,6 +12,7 @@ import javax.persistence.Table;
 @Table(name="t_user")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String uname;
     private Integer age;

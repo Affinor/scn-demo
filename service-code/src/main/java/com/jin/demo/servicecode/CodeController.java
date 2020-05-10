@@ -23,20 +23,19 @@ public class CodeController {
     @Autowired
     EmailServiceFeignClient emailServiceFeignClient;
 
-    @GetMapping("/createCode")
-    public String createCode(String name){
+    @GetMapping("/create/{email}")
+    public String createCode(@PathVariable("email") String email){
         //生成验证码
         String code = String.valueOf(new Random().nextInt());
         //验证码存放10分钟
-        redisTemplate.opsForValue().set(name,code,10, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(email,code,10, TimeUnit.MINUTES);
         //发送邮件
-        String result = emailServiceFeignClient.sendEmail(name, code);
-        return "createCode:"+name+"===>>result:"+result;
+        String result = emailServiceFeignClient.sendEmail(email, code);
+        return "createCode:"+email+"===>>result:"+result;
     }
 
-    @GetMapping("/checkCode")
-    public Boolean checkCode(String name, String code){
-        Object o = redisTemplate.opsForValue().get(name);
-        return code.equals(o);
+    @GetMapping("/checkCode/{email}/{code}")
+    public Boolean checkCode(@PathVariable("email") String email,@PathVariable("code") String code){
+        return code.equals(redisTemplate.opsForValue().get(email));
     }
 }

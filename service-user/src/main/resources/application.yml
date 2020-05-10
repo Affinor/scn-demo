@@ -3,6 +3,17 @@ server:
 spring:
   application:
     name: service-user
+  security:
+    user:
+      name: eureka
+      password: eureka
+  redis:
+    host: 127.0.0.1
+    port: 3679
+  mvc:
+    view:
+      prefix: ""
+      suffix: ""
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql:///test?characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&autoReconnect=true&failOverReadOnly=false
@@ -14,12 +25,6 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-  cloud:
-    config:
-      name: service-user
-      profile: dev
-      label: master
-      uri: http://localhost:9006
 
 eureka:
   client:

@@ -15,7 +15,7 @@ public class EmailServiceImpl implements EmailService {
     public String sendEmail(String email, String code) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom("jin_obj@sina.com");
-        simpleMailMessage.setTo("fxx150118@foxmail.com");
+        simpleMailMessage.setTo(email);
         simpleMailMessage.setSubject("验证码");
         simpleMailMessage.setText(code);
         javaMailSender.send(simpleMailMessage);

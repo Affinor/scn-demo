@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(User user) {
-        return userDao.saveAndFlush(user);
+        return userDao.save(user);
     }
 
     @Override
